@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+    <title>ChatHub - Getting Started</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/generate_homepage.js"></script>
+  </head>
+
+  <body onload="loadcontent()">
+
+      <div class="jumbotron" style="padding: 0px;">
+        <div id="welcome">
+
+          <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Lets Get Started</button>
+
+          <!-- Modal -->
+          <div class="modal fade" id="myModal" role="dialog">
+              <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Log In</h4>
+                  </div>
+
+                  <div class="modal-body">
+                    <p>Check here to sign in as a guest.</p>
+                    <div class="checkbox">
+                      Username
+                      <input type="username" class="form-control" id="username" placeholder="Choose a Username">
+                      <label><input type="button"> Sign in as Guest</label>
+
+                    </div>
+                  </div>
+
+                  <div class="modal-body">
+                    <p>Check here to sign in with an account.</p>
+                    <div class="checkbox">
+                      Username
+                      <input type="username" class="form-control" id="username" placeholder="">
+                      Password
+                      <input type="password" class="form-control" id="passsword" placeholder="">
+                      <label><input type="button"> Forget Password?</label>
+                      <label><input type="button"> Sign in</label>
+                      <br \>
+                      <br \>
+                      <label><input type="button"> Want to create an account?</label>
+
+                    </div>
+                  </div>
+
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                  </div>
+                </div>
+
+              </div>
+          </div>
+
+
+
+        </div>
+      </div>
+
+  </body>
+
+</html>

@@ -1,0 +1,63 @@
+
+html {
+    background: #969696;
+    max-width: 100%;
+    overflow-x: hidden;
+    height: 100%;
+}
+
+body {
+    background: #2a313d;
+    box-shadow: 0 0 2px rgba(0, 0, 0, 0.06);
+    color: #f4f4f4;
+    margin: 0 auto;
+    max-width: 100%;
+    overflow-x: hidden;
+    height: 100%;
+    overflow: hidden;
+}
+
+.jumbotron {
+  background: #CCCCCC;
+  outline-style: solid;
+  outline-color: #363636;
+  outline-width: 1px;
+  box-shadow: 3px 3px 2px #222222;
+  padding-left: 0px;
+  padding-right: 0px;
+  padding-bottom: 0px;
+  color: #222222;
+}
+
+.jumbotron #welcome {
+  background-image: url('../pics/background.JPG');
+  background-size: cover;
+  height: 100vh;
+  text-align: center;
+  padding-top: 50px;
+  padding: 50px;
+  color: #CCCCCC;
+}
+
+.jumbotron #hub {
+  height: 100vh;
+}
+
+.jumbotron #sidebar {
+  height: 65vh;
+}
+
+.jumbotron #mainpage {
+  height: 65vh;
+}
+
+@keyframes login {
+  from {right: 300%;}
+  to {right: 0%;}
+}
+
+.form-group {
+  margin-left: auto;
+  margin-right: auto;
+  width: 75%;
+}
