@@ -65,10 +65,13 @@ body {
   overflow: auto;
 }
 
-.jumbotron #chatbar {
+.jumbotron #chatbar #chat{
   height: 5vh;
   overflow: auto;
+  width: 40vw;
 }
+
+
 
 @keyframes login {
   from {right: 300%;}
