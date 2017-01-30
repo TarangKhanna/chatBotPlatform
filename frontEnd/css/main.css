@@ -43,12 +43,31 @@ body {
   text-align: center;
 }
 
-.jumbotron #sidebar {
-  height: 65vh;
+.jumbotron #headbar {
+  outline-style: none;
+  height: 10vh;
+  overflow: auto;
 }
 
+.jumbotron #userbar {
+  height: 30vh;
+  overflow: auto;
+}
+
+.jumbotron #roombar {
+  height: 35vh;
+  overflow: auto;
+}
+
+
 .jumbotron #mainpage {
-  height: 65vh;
+  height: 60vh;
+  overflow: auto;
+}
+
+.jumbotron #chatbar {
+  height: 5vh;
+  overflow: auto;
 }
 
 @keyframes login {
@@ -59,4 +78,9 @@ body {
 .form-group {
   margin-left: auto;
   margin-right: auto;
+}
+
+.btn-primary {
+  height: inherit;
+  width: 18vw;
 }
