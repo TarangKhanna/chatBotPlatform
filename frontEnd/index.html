@@ -9,6 +9,7 @@
     <link rel="stylesheet" type="text/css" href="css/main.css">
     <script type="text/javascript" src="js/bootstrap.min.js"></script>
     <script type="text/javascript" src="js/generate_homepage.js"></script>
+    <script type="text/javascript" src="js/glue.js"></script>
   </head>
 
   <body onload="loadcontent()">
@@ -34,8 +35,8 @@
                     <p>Check here to sign in as a guest.</p>
                     <div class="checkbox">
                       Username
-                      <input type="username" class="form-control" id="username" placeholder="Choose a Username">
-                      <label><input type="button"> Sign in as Guest</label>
+                      <input type="username" class="form-control" id="guestUsername" placeholder="Choose a Username">
+                      <label><input type="button" onclick="guestSignin()"> Sign in as Guest</label>
 
                     </div>
                   </div>
@@ -44,14 +45,14 @@
                     <p>Check here to sign in with an account.</p>
                     <div class="checkbox">
                       Username
-                      <input type="username" class="form-control" id="username" placeholder="">
+                      <input type="username" class="form-control" id="loginUsername" placeholder="">
                       Password
-                      <input type="password" class="form-control" id="passsword" placeholder="">
-                      <label><input type="button"> Forget Password?</label>
-                      <label><input type="button"> Sign in</label>
+                      <input type="password" class="form-control" id="loginPasssword" placeholder="">
+                      <label><input type="button" onclick="forgotPswd()"> Forget Password?</input></label>
+                      <label><input type="button" onclick="login()"> Sign in</input></label>
                       <br \>
                       <br \>
-                      <label><input type="button"> Want to create an account?</label>
+                      <label><input type="button" onclick="createAcct()"> Want to create an account?</label>
 
                     </div>
                   </div>
