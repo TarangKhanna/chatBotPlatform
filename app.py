@@ -100,6 +100,14 @@ def processRequest(req):
   #   ]
   # }
 
+
+def getChartURL(req):
+    result = req.get("result")
+    parameters = result.get("parameters")
+    stock_symbol = parameters.get("stock_symbol")
+    chart_url = "https://www.etoro.com/markets/" + stock_symbol + "/chart"
+    return chart_url
+    
 if __name__ == '__main__':
     port = int(os.getenv('PORT', 5000))
 
