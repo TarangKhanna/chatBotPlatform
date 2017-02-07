@@ -100,6 +100,26 @@ def processRequest(req):
   #   ]
   # }
 
+def getStockPrediction(req):
+    result = req.get("result")
+    parameters = result.get("parameters")
+    stock_symbol = parameters.get("stock_symbol")
+
+    time = parameters.get("date-period")
+
+    if stock_symbol is None:
+        return None
+
+    num_of_days = 3
+    if time != '' and time is not None:
+        num_of_days = extract_days(time)
+
+    prediction = predictStocks()
+    predicted_values = prediction.stocksRegression(stock_symbol, int(num_of_days))
+    predicted_list = predicted_values.tolist()
+    clean_list = cleanPrediction(predicted_list)
+
+    return '\n'.join(str(v) for v in clean_list)
 
 def getChartURL(req):
     result = req.get("result")
@@ -107,7 +127,7 @@ def getChartURL(req):
     stock_symbol = parameters.get("stock_symbol")
     chart_url = "https://www.etoro.com/markets/" + stock_symbol + "/chart"
     return chart_url
-    
+
 if __name__ == '__main__':
     port = int(os.getenv('PORT', 5000))
 
