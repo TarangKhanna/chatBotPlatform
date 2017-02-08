@@ -138,6 +138,39 @@ def getChartURL(req):
     chart_url = "https://www.etoro.com/markets/" + stock_symbol + "/chart"
     return chart_url
 
+
+# analyze feelings intent
+def getTwitterFeelings(req):
+    result = req.get("result")
+    parameters = result.get("parameters")
+    stock_symbol = parameters.get("stock_symbol")
+    if stock_symbol is None:
+        return None
+
+    twitter_analyzer = twitter_analyze()
+    twitter_data = twitter_analyzer.analyze_feelings(stock_symbol)
+    print 'Twitter data:'
+    print twitter_data
+
+    data = {}
+    data['positive'] = twitter_data[0]
+    data['negative'] = twitter_data[1]
+    data['neutral'] = twitter_data[2]
+
+    total = data['positive'] + data['negative'] + data['neutral']
+
+    positive_percent = percentage(data['positive'], total)
+    negative_percent = percentage(data['negative'], total)
+    neutral_percent = percentage(data['neutral'], total)
+
+    data_string = 'positive: ' + str(positive_percent) + '% negative: ' + str(negative_percent) + '% neutral: ' + str(neutral_percent) + '%'
+
+    return data_string
+
+# make percentage and round
+def percentage(part, whole):
+    return round(100 * float(part)/float(whole), 2)
+
 if __name__ == '__main__':
     port = int(os.getenv('PORT', 5000))
 
