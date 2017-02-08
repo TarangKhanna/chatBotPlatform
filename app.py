@@ -171,6 +171,126 @@ def getTwitterFeelings(req):
 def percentage(part, whole):
     return round(100 * float(part)/float(whole), 2)
 
+def makeWebhookResult(data, req, stock_symbol):
+    action = req.get("result").get("action")
+    originalRequest1 = req.get("originalRequest")
+    source = ''
+    if originalRequest1 != None:
+        source = originalRequest1.get("source")
+    if action == "CurrentPrice.price":
+        speech = "Current Price for the stock is $" + str(data)
+        next_speech = "Predict " + stock_symbol
+        # news_speech = "News for " + stock_symbol
+        # news_url = "http://finance.yahoo.com/quote/" + stock_symbol
+        chart_speech = "Chart for " + stock_symbol
+        chart_url = "https://www.etoro.com/markets/" + stock_symbol + "/chart"
+        feelings_speech = 'Feelings ' + stock_symbol
+        if source == 'facebook':
+            return {
+                "speech": speech,
+                "displayText": speech,
+                "source": "apiai-wallstreetbot-webhook", 
+                "data": {
+                    "facebook": {
+                      "attachment": {
+                        "type": "template",
+                        "payload": {
+                                "template_type":"button",
+                                "text":speech,
+                                "buttons":[
+                                  {
+                                    "type":"web_url",
+                                    "url":chart_url,
+                                    "title":chart_speech,
+                                    "webview_height_ratio": "compact"
+                                  },
+                                  {
+                                    "type":"postback",
+                                    "title":next_speech,
+                                    "payload":next_speech
+                                  },
+                                  {
+                                    "type":"postback",
+                                    "title":feelings_speech,
+                                    "payload":feelings_speech
+                                  }
+                                ]
+                            }
+                         }
+                    }
+                }
+            }
+
+    elif action == "Prediction.stockForecast":
+        speech = "Predicted price for coming days: " + str(data)
+    elif action == "Feelings.analyze":
+        speech = "Feelings for " + stock_symbol + ": " + str(data)
+    elif action == "Decision.Classification":
+        speech = "I think we should " + str(data) + " " + stock_symbol 
+        if source == 'facebook':
+            return {
+                "speech": speech,
+                "displayText": speech,
+                "source": "apiai-wallstreetbot-webhook", 
+                "data": {
+                    "facebook": {
+                      "text":speech + '. Type away more questions!',
+                        "quick_replies":[
+                          {
+                            "content_type":"text",
+                            "title":"Need help?",
+                            "payload":"Help"
+                          }
+                        ]
+                    }
+                }
+            }
+
+    elif action == "input.welcome":
+        speech = str(data)
+    elif action == "Visualize.chart":
+        speech = 'Here is your chart:'
+        chart_url = str(data)
+        chart_speech = "Chart for " + stock_symbol
+
+        if source == 'facebook':
+            return {
+                "speech": speech,
+                "displayText": speech,
+                "source": "apiai-wallstreetbot-webhook", 
+                "data": {
+                    "facebook": {
+                      "attachment": {
+                        "type": "template",
+                        "payload": {
+                                "template_type":"button",
+                                "text":speech,
+                                "buttons":[
+                                  {
+                                    "type":"web_url",
+                                    "url":chart_url,
+                                    "title":chart_speech,
+                                    "webview_height_ratio": "compact"
+                                  },
+                                ]
+                            }
+                         }
+                    }
+                }
+            }
+
+    else:
+        speech = str(data)
+
+    print("Response:")
+    print(speech)
+
+    return {
+        "speech": speech,
+        "displayText": speech,
+        "source": "apiai-wallstreetbot-webhook"
+    }
+    
 if __name__ == '__main__':
     port = int(os.getenv('PORT', 5000))
 
