@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 
-  <head>
+<head>
     <meta charset="utf-8">
     <title>ChatHub - Getting Started</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
@@ -10,66 +10,86 @@
     <script type="text/javascript" src="js/bootstrap.min.js"></script>
     <script type="text/javascript" src="js/generate_homepage.js"></script>
     <script type="text/javascript" src="js/glue.js"></script>
-  </head>
+    <script type="text/javascript">
+        $(document).ready(function() {
+          $("#guestUsername").focus();
+            $("#guestUsername").on('keyup', function(e) {
+                if (e.keyCode == 13) {
+                    guestSignin();
+                }
+            });
+            $("#loginUsername").on('keyup', function(e) {
+                if (e.keyCode == 13) {
+                    document.getElementById("loginPassword").focus();
+                }
+            });
+            $("#loginPassword").on('keyup',
+                function(e) {
+                    if (e.keyCode == 13) {
+                        login();
+                    }
+                });
+        })
+    </script>
+</head>
 
-  <body onload="loadcontent()">
+<body onload="loadcontent()">
 
-      <div class="jumbotron" style="padding: 0px;">
+    <div class="jumbotron" style="padding: 0px;">
         <div id="welcome">
 
-          <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Lets Get Started</button>
+            <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Let's Get Started</button>
 
-          <!-- Modal -->
-          <div class="modal fade" id="myModal" role="dialog">
-              <div class="modal-dialog">
+            <!-- Modal -->
+            <div class="modal fade" id="myModal" role="dialog">
+                <div class="modal-dialog">
 
-                <!-- Modal content-->
-                <div class="modal-content">
+                    <!-- Modal content-->
+                    <div class="modal-content">
 
-                  <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">Log In</h4>
-                  </div>
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">Log In</h4>
+                        </div>
 
-                  <div class="modal-body">
-                    <p>Check here to sign in as a guest.</p>
-                    <div class="checkbox">
-                      Username
-                      <input type="username" class="form-control" id="guestUsername" placeholder="Choose a Username">
-                      <label><input type="button" onclick="guestSignin()"> Sign in as Guest</label>
+                        <div class="modal-body">
+                            <p>Check here to sign in as a guest.</p>
+                            <div class="checkbox">
+                                Username
+                                <input type="username" class="form-control" id="guestUsername" placeholder="Choose a Username">
+                                <button type="button" class="btn btn-default" onclick="guestSignin()">Sign in as Guest</button>
 
+                            </div>
+                        </div>
+
+                        <div class="modal-body">
+                            <p>Check here to sign in with an account.</p>
+                            <div class="checkbox">
+                                Username
+                                <input type="username" class="form-control" id="loginUsername" placeholder="Enter Username"> Password
+                                <input type="password" class="form-control" id="loginPassword" placeholder="Enter Password">
+                                <button type="button" class="btn btn-default" onclick="login()">Sign in</button>
+                                <button type="button" class="btn btn-default" onclick="forgotPswd()">Forgot Password?</button>
+                                <br \>
+                                <br \>
+                                <button type="button" class="btn btn-default" onclick="createAcct()">Want to create an account?</button>
+
+                            </div>
+                        </div>
+
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        </div>
                     </div>
-                  </div>
 
-                  <div class="modal-body">
-                    <p>Check here to sign in with an account.</p>
-                    <div class="checkbox">
-                      Username
-                      <input type="username" class="form-control" id="loginUsername" placeholder="Enter Username">
-                      Password
-                      <input type="password" class="form-control" id="loginPassword" placeholder="Enter Password">
-                      <label><input type="button" onclick="login()"> Sign in</label>
-                      <label><input type="button" onclick="forgotPswd()"> Forget Password?</label>
-                      <br \>
-                      <br \>
-                      <label><input type="button" onclick="createAcct()"> Want to create an account?</label>
-
-                    </div>
-                  </div>
-
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                  </div>
                 </div>
-
-              </div>
-          </div>
+            </div>
 
 
 
         </div>
-      </div>
+    </div>
 
-  </body>
+</body>
 
 </html>
