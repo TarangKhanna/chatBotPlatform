@@ -1,4 +1,4 @@
-function check() {
+function checkmessage() {
 
   // check validity of message before POST
 
