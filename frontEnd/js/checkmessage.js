@@ -6,6 +6,8 @@ function checkmessage() {
   var len = string.length;
   const MAXLEN = 1024;
 
+  alert("String: " + string + " Length: " + len);
+
   if (len < 1) {
     // send error to user
   }
