@@ -13,6 +13,12 @@ function guestSignin(){
 
 }
 
+function signUp(){
+  var uname = $("#username")[0].value;
+  var email = $("#email")[0].value;
+  var pswd = $("#pswd")[0].value;
+}
+
 function forgotPswd(){
 
 }
