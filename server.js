@@ -48,3 +48,21 @@ function getRooms(str, rooms)
 		console.log(str);
 	}
 }
+
+app.set('views', __dirname + '/public');//view = front end
+app.set('view engine', 'jade');
+app.set("view options", { layout: false });
+
+app.use(express.static(__dirname + '/public'));//Express helps serve files
+
+// Render and send the main page
+//does magical mapping
+app.get('/', function(req, res){
+  res.render('home.jade');
+});
+
+
+app.get('/settings', function(req, res){
+  res.render('settings.jade');
+});
+
