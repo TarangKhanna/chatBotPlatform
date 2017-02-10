@@ -414,7 +414,7 @@ class predictStocks:
 		# using yahoo finance api to get current stock price
 	def getCurrentPrice(self, stockName):
 		stock = Share(stockName)
-		return stock.get_price()
+		return float(stock.get_price())
 
 	def getDividendPayDate(self, stockName):
 		stock = Share(stockName)
