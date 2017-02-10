@@ -17,3 +17,34 @@ server.listen(serverPort, host, function() {
 	// print a message when the server starts listening
   console.log("server starting on " + host + ":" + serverPort);
 });//creating actual server
+var db = require('./database.js');
+
+function getMsg(name, text, emotion)
+{
+	var message = {name: name, message: text};
+	var emoticon = {name: name, emotion: emotion["emotion"]};
+// 	console.log("name = " + name + "\t\ntext = " + text + "\t\nemotion = " + emotion);
+// 	io.sockets.emit('message', message);
+// 	io.sockets.emit('emotion', emoticon);
+// }
+
+function getRooms(str, rooms)
+{
+	if(str == "success")
+	{
+		//load rooms
+		for(var i = 0; i < rooms.length; i++)
+		{
+			console.log("found room:");
+			console.log(rooms[i]);
+		}
+		// for(var room_ID in rooms[0])
+		// {
+		// 	db.enterChatroom(room_ID, getMsg);
+		// }
+	}
+	else
+	{
+		console.log(str);
+	}
+}
