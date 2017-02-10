@@ -20,7 +20,12 @@ function signUp(){
 }
 
 function forgotPswd(){
+window.location.href = "forgot.html";
+}
 
+function recover(){
+  var email = $("#email")[0].value;
+  alert(email);
 }
 
 function createAcct(){

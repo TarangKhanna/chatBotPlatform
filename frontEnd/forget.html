@@ -8,10 +8,11 @@
     <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="css/main.css">
     <script type="text/javascript" src="js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="js/generate_homepage.js"></script>
+    <!-- <script type="text/javascript" src="js/generate_homepage.js"></script> -->
+    <script type="text/javascript" src="js/glue.js"></script>
   </head>
 
-  <body onload="loadcontent()">
+  <body>  <!-- onload="loadcontent()"-->
 
     <div class="container">
 
@@ -34,7 +35,7 @@
            </div>
            <div class="form-group">
              <div class="col-sm-offset-2 col-sm-10">
-               <button type="submit" class="btn btn-default">Submit</button>
+               <button type="submit" class="btn btn-default" onclick="recover()">Submit</button>
              </div>
            </div>
           </form>
