@@ -3,10 +3,17 @@ function loadcontent() {
   var opening = document.getElementById('roombar');
   var side = document.getElementById('userbar');
   var main = document.getElementById('mainpage');
+
+  //needed from server:
+  //  -users in room - roombar
+  //  -all other rooms - userbar
+  //  -last x messages in current room - Mainpage
+
+  // parse info from server into HTML format
+
   var ucontent = 'userbar<br \>User 1 - in chatroom<br \>User 2 - in chatroom<br \>User 3 - in chatroom<br \>User 1 - in chatroom<br \>User 2 - in chatroom<br \>User 3 - in chatroom<br \>User 1 - in chatroom<br \>User 2 - in chatroom<br \>User 3 - in chatroom<br \>';
   var rcontent = 'roombar<br \>Room 1 - not empty -<button type="button" class="btn">Enter</button><br \>Room 2 - empty -<button type="button" class="btn">Enter</button><br \>Room 3 - in chatroom<br \>';
   var mcontent = 'Mainpage';
-
 
   userbar.innerHTML = ucontent;
   roombar.innerHTML = rcontent;
@@ -15,8 +22,5 @@ function loadcontent() {
   // RESET COUNTERS
   content = '';
   counter = 0;
-
-
-
 
 }
