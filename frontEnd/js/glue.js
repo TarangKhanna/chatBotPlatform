@@ -1,22 +1,32 @@
-$(document).ready(function(){
-  //alert("here");
-})
+// $(document).ready(function(){
+//   //alert("here");
+// })
 
 function login(){
   var uname = $('#loginUsername')[0].value;
   var pswd = $('#loginPassword')[0].value;
 
+  // do login things here
+
+  window.location.href = "chathub.html";
 }
 
 function guestSignin(){
   var info = $('#guestUsername')[0].value;
 
+  // do sign in things here
+
+  window.location.href = "chathub.html";
 }
 
 function signUp(){
   var uname = $("#username")[0].value;
   var email = $("#email")[0].value;
   var pswd = $("#pswd")[0].value;
+
+  // do signup things
+
+  window.location.href = "chathub.html";
 }
 
 function forgotPswd(){
