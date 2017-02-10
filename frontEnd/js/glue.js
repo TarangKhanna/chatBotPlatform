@@ -3,14 +3,14 @@ $(document).ready(function(){
 })
 
 function login(){
-  var uname = $('#loginUsername')[0].vaue;
+  var uname = $('#loginUsername')[0].value;
   var pswd = $('#loginPassword')[0].value;
-  console.log(info);
+
 }
 
 function guestSignin(){
   var info = $('#guestUsername')[0].value;
-  console.log(info);
+
 }
 
 function forgotPswd(){
@@ -18,5 +18,5 @@ function forgotPswd(){
 }
 
 function createAcct(){
-  
+  window.location.href = "account.html";
 }
