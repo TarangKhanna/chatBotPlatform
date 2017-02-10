@@ -1,7 +1,8 @@
-function check(string) {
+function check() {
 
   // check validity of message before POST
-  var string = "Test String";
+
+  var string = document.getElementsById("chat");
   var len = string.length;
   const MAXLEN = 1024;
 
