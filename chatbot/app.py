@@ -290,6 +290,52 @@ def makeWebhookResult(data, req, stock_symbol):
         "displayText": speech,
         "source": "apiai-wallstreetbot-webhook"
     }
+
+    
+def extract_days(time):
+    num_days = 3
+    dates = time.split('/')
+
+    if dates is not None:
+        first = datetime.strptime(dates[0], "%Y-%m-%d").date()
+        second = datetime.strptime(dates[1], "%Y-%m-%d").date()
+        num_days = (second - first).days+1
+    else:
+        dates = time.split(' ')
+        if dates is not None:
+            if dates[0].isdigit():
+                num_days = int(dates[0])
+
+    return num_days
+
+# intent current price
+def getStockCurrentPrice(req):
+    # db test
+    # print 'Accessing database'
+    # cursor = cnx.cursor(buffered = True)
+    # str_call = 'SELECT * FROM USER_BASIC_INFO'
+    # cursor.execute(str_call);
+
+    # data = cursor.fetchone()
+    # cnx.commit()
+    # cursor.close()
+
+    # print data
+    # db test
+
+    result = req.get("result")
+    parameters = result.get("parameters")
+    stock_symbol = parameters.get("stock_symbol")
+    if stock_symbol is None:
+        return None
+
+    prediction = predictStocks()
+    current_price = prediction.getCurrentPrice(stock_symbol)
+
+
+    return str(current_price)
+
+
     
 if __name__ == '__main__':
     port = int(os.getenv('PORT', 5000))
