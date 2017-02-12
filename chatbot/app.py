@@ -335,6 +335,25 @@ def getStockCurrentPrice(req):
 
     return str(current_price)
 
+# last 5 days data
+def getHistoricalData(req):
+    result = req.get("result")
+    parameters = result.get("parameters")
+    stock_symbol = parameters.get("stock_symbol")
+    if stock_symbol is None:
+        return None
+
+    last_days = 5
+
+    past_days_ago = datetime.now() - timedelta(days=last_days)
+    past_days_ago_str = past_days_ago.strftime('%Y-%m-%d')
+
+    now = datetime.now().date()
+    now_str = now.strftime('%Y-%m-%d')
+
+    stock = Share(stock_symbol)
+    return str(stock.get_historical(past_days_ago_str, now_str))
+
 
     
 if __name__ == '__main__':
