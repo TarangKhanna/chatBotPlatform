@@ -28,3 +28,31 @@ html
                 if (i < 10) {i = "0" + i};  // add zero in front of numbers < 10
                 return i;
             }
+
+    body(onload="startTime();")
+        div#usersInRoom  
+        div#right
+            div#room 
+        div#middle
+            div#updates
+        div.container
+            div#welcomeParagraph
+            div.modal#nameForm
+                p.userNamePara Enter Username:
+                input(type='text')#nameInput
+                button.myButton#signIn Sign In
+                p.userNamePara Enter Password:
+                input(type='password')#passwordInput
+                button.myButton#signUp Sign Up
+            div#chatEntries.chat
+                div#chatEntriesright
+            div#chatControls
+                div.group
+                    input(type='text' required)#messageInput
+                    span.highlight
+                    span.bar
+                    label Message
+            div#nbUsersDiv
+                p There are 
+                    span#nbUsers 
+                    |  user(s) in the room
