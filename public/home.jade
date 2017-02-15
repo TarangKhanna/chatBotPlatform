@@ -1,0 +1,30 @@
+doctype HTML
+html
+    head
+        title Chatroom
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        script(src='https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js')
+        script(src="/socket.io/socket.io.js")
+        script(scr="server.js")
+        script(src="script.js")
+        script(src="jquery.modal.js")
+        link(rel="stylesheet", href="https://fonts.googleapis.com/css?family=Rancho&effect=shadow-multiple")
+        link(rel="stylesheet", href="style.css")
+        link(rel="stylesheet", href="jquery.modal.css")
+
+        script(type='text/javascript').
+            function startTime() {
+                var today = new Date();
+                var h = today.getHours();
+                var m = today.getMinutes();
+                var s = today.getSeconds();
+                m = checkTime(m);
+                s = checkTime(s);
+                //document.getElementById('txt').innerHTML =
+                //h + ":" + m + ":" + s;
+                var t = setTimeout(startTime, 500);
+            }
+            function checkTime(i) {
+                if (i < 10) {i = "0" + i};  // add zero in front of numbers < 10
+                return i;
+            }
