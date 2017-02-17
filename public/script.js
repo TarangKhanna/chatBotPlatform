@@ -79,7 +79,7 @@ function setName(isSignIn) {
 		        // $('#signUp').hide();
 		  // 		  $('#signIn').hide();
 		        $("#welcomeParagraph").show();
-		        $("#welcomeParagraph").html('<div class="Welcome"><p> Hello! ' + $("#nameInput").val() + '. Welcome to Emomix.</p></div>');   
+		        $("#welcomeParagraph").html('<div class="Welcome"><p> Hello! ' + $("#nameInput").val() + '. Welcome to our CS408 Proj.</p></div>');   
 		    // $("#userName").html('<div class="User in room"><p> ' + $("#nameInput").val() + '</p></div>');  
 			}
 			else if(data == "error")
@@ -108,7 +108,99 @@ function setName(isSignIn) {
   }
 }
 
-socket.on('emotion', function(data) {
-  addEmotion(data['emotion'], data['name']);
+
+// added custom method to String
+String.prototype.contains = function(it) { return this.indexOf(it) != -1; };
+
+socket.on('message', function(data) {
+    addMessage(data['message'], data['name']);
+    console.log(data);
+    notifyMe(data['name'],data['message']);
 });
 
+socket.on('nbUsers', function(msg) {
+    console.log(msg.nb);
+    $("#nbUsers").html(msg.nb);
+});
+
+socket.on('usersInRoom', function(msg){
+    $("#room").empty(); // clear, users might disconnect, and its appending
+    $("#room").append("Users in room: <br/>")
+    for(i = 0; i < msg.un.length; i++){
+      $("#room").append("- " + msg.un[i] + "<br/>");
+    }
+    // $("#updates").append("------------");
+});
+
+
+// push notifications 
+function notifyMe(user,message) {
+  if(currentUser != user) { // do not notify user sending the message ofc
+    // Let's check if the browser supports notifications
+    if (!("Notification" in window)) {
+      alert("This browser does not support desktop notification");
+    }
+    // Let's check if the user is okay to get some notification
+    else if (Notification.permission === "granted") {
+      // If okay let's create a notification
+      var options = {
+          body: message,
+          dir : "ltr"
+      };
+      var notification = new Notification(user + " Sent a message",options);
+      
+    }
+    // Otherwise, we need to ask the user for permission
+    // Note, Chrome does not implement the permission static property
+    // So we have to check for NOT 'denied' instead of 'default'
+    else if (Notification.permission !== 'denied') {
+      Notification.requestPermission(function (permission) {
+        // Whatever the user answers, we make sure we store the information
+        if (!('permission' in Notification)) {
+          Notification.permission = permission;
+        }
+        // If the user is okay, let's create a notification
+        if (permission === "granted") {
+          var options = {
+                  body: message,
+                  dir : "ltr"
+          };
+          var notification = new Notification(user + " Sent a message",options);
+        }
+      });
+    }
+    // Do nothing if user denies notification
+  }
+}
+
+// init
+
+$(function() {
+    // $('html, body').css({
+    //   'overflow': 'hidden',
+    //   'height': '100%'
+    // });
+    $("#chatControls").hide();
+    $("#messageInput").keypress(function(e) {
+		// alert("typing");
+	 	 if (e.which !== 13) {
+		    if (typing === false && $("#messageInput").is(":focus")) {
+		      typing = true;
+		      socket.emit("typing", {isTyping: true, person: currentUser});
+
+		    } else {
+		      clearTimeout(timeout);
+		      timeout = setTimeout(timeoutFunction, 5000);
+		    }
+		} else {
+			sendMessage();
+		}
+	});
+	
+    $('#nameForm').modal({escapeClose: false, clickClose: false, showClose: false});
+    $("#signUp").click(function() {setName(0)});
+    $("#signIn").click(function() {setName(1)});
+    $("#").click(function() {setName()});
+    $("#submit").click(function() {sendMessage();});
+    $("#welcomeParagraph").hide();
+});
