@@ -13,7 +13,7 @@ var http = require('http')//for node js to connect to internets
   , server = http.createServer(app)//creates actual server
   , io = require('socket.io').listen(server);
 var jade = require('jade');//support for jade
-var html = require('html');//support for html
+//var html = require('html');//support for html
 var nameArray = [];	// contain all name of user in the room
 var users = 0; //number of connected users
 
@@ -77,8 +77,8 @@ function getRooms(str, rooms)
 //////////////////////////////////////////////////////////////////////////////////
 
 app.set('views', __dirname + '/public');//view = front end
-//app.set('view engine', 'jade');
-app.set('view engine', 'html');
+app.set('view engine', 'jade');
+//app.set('view engine', 'html');
 app.set("view options", { layout: false });
 
 app.use(express.static(__dirname + '/public'));//Express helps serve files
@@ -86,12 +86,12 @@ app.use(express.static(__dirname + '/public'));//Express helps serve files
 // Render and send the main page
 //does magical mapping
 app.get('/', function(req, res){
-  //res.render('home.jade');
-  res.render('index.html');
+  res.render('home.jade');
+  //res.render('index.html');
 });
 
 app.get('/settings', function(req, res){
-  //res.render('settings.jade');
+  res.render('settings.jade');
   //res.render('settings.html');
 });
 

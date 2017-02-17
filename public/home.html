@@ -1,0 +1,16 @@
+<!DOCTYPE HTML><html><head><title>Chatroom</title><meta name="viewport" content="width=device-width, initial-scale=1.0"><script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script><script src="/socket.io/socket.io.js"></script><script scr="server.js"></script><script src="script.js"></script><script src="jquery.modal.js"></script><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Rancho&amp;effect=shadow-multiple"><link rel="stylesheet" href="style.css"><link rel="stylesheet" href="jquery.modal.css"><script type="text/javascript">function startTime() {
+    var today = new Date();
+    var h = today.getHours();
+    var m = today.getMinutes();
+    var s = today.getSeconds();
+    m = checkTime(m);
+    s = checkTime(s);
+    //document.getElementById('txt').innerHTML =
+    //h + ":" + m + ":" + s;
+    var t = setTimeout(startTime, 500);
+}
+function checkTime(i) {
+    if (i < 10) {i = "0" + i};  // add zero in front of numbers < 10
+    return i;
+}
+</script></head><body onload="startTime();"><div id="usersInRoom"> </div><div id="right"><div id="room"> </div></div><div id="middle"><div id="updates"></div></div><div class="container"><div id="welcomeParagraph"></div><div id="nameForm" class="modal"><p class="userNamePara">Enter Username:</p><input type="text" id="nameInput"><button id="signIn" class="myButton">Sign In</button><p class="userNamePara">Enter Password:</p><input type="password" id="passwordInput"><button id="signUp" class="myButton">Sign Up</button></div><div id="chatEntries" class="chat"><div id="chatEntriesright"></div></div><div id="chatControls"><div class="group"><input type="text" required id="messageInput"><span class="highlight"></span><span class="bar"></span><label>Message</label></div></div><div id="nbUsersDiv"><p>There are <span id="nbUsers"> </span> user(s) in the room</p></div></div></body></html>
