@@ -13,6 +13,7 @@ var http = require('http')//for node js to connect to internets
   , server = http.createServer(app)//creates actual server
   , io = require('socket.io').listen(server);
 var jade = require('jade');//support for jade
+var html = require('html');//support for html
 var nameArray = [];	// contain all name of user in the room
 var users = 0; //number of connected users
 
@@ -76,7 +77,8 @@ function getRooms(str, rooms)
 //////////////////////////////////////////////////////////////////////////////////
 
 app.set('views', __dirname + '/public');//view = front end
-app.set('view engine', 'jade');
+//app.set('view engine', 'jade');
+app.set('view engine', 'html');
 app.set("view options", { layout: false });
 
 app.use(express.static(__dirname + '/public'));//Express helps serve files
@@ -84,11 +86,13 @@ app.use(express.static(__dirname + '/public'));//Express helps serve files
 // Render and send the main page
 //does magical mapping
 app.get('/', function(req, res){
-  res.render('home.jade');
+  //res.render('home.jade');
+  res.render('index.html');
 });
 
 app.get('/settings', function(req, res){
-  res.render('settings.jade');
+  //res.render('settings.jade');
+  //res.render('settings.html');
 });
 
 
@@ -98,7 +102,7 @@ io.sockets.on('connection', function (socket) {
 	socket.on('message', function (data) { // Broadcast the message
 		var transmit = {name : socket.nickname, message : data};
 		io.sockets.emit('message', transmit);
-		
+
 		console.log("user "+ transmit['name'] +" said \""+data+"\"");
 	});
 
@@ -109,14 +113,14 @@ io.sockets.on('connection', function (socket) {
 		console.log("user entered room");
 	});
 
-	socket.on("typing", function(data) {  
+	socket.on("typing", function(data) {
 		// console.log(data);
    		io.sockets.emit("isTyping", {isTyping: data.isTyping, person: data.person});
 	});
 
 	socket.on('setName', function (data) { // Assign a name to the user
-		
-	});	
+
+	});
 
 	socket.on('setUser', function (data) {
 		// DB
@@ -146,7 +150,7 @@ io.sockets.on('connection', function (socket) {
 					else
 						socket.emit("nameStatus", "wrongPassword");
 				});
-		} 
+		}
 		else {
 			// sign up
 			db.signup(data['username'], data['password'], function(username, password, bool)
@@ -176,7 +180,7 @@ io.sockets.on('connection', function (socket) {
 	});
 
 	socket.on('disconnect', function () { // Disconnection of the client
-		// sent by socket io automatically 
+		// sent by socket io automatically
 		console.log("Disconnection");
 		name = socket.nickname;
 		var index = nameArray.indexOf(name);

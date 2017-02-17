@@ -1,3 +1,5 @@
+var socket = io.connect();
+
 function checkMessage() {
 
   // check validity of message before POST
@@ -18,7 +20,12 @@ function checkMessage() {
   }
   else {
     // POST message here
+    sendMessage(string);
   }
+}
 
-
+function sendMessage(string) {
+    //socket.emit('message', string);
+    alert("send message");
+    $('#chat').val(''); // clear
 }
