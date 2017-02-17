@@ -10,9 +10,11 @@ function checkMessage() {
 
   if (len < 1) {
     // send error to user
+    alert("Your message does not seem to contain anything.\nPlease enter a message to send.");
   }
   else if (len > MAXLEN) {
     // send error to user
+    alert("Your message seems to contain too much.\nPlease enter a shorter message to send.");
   }
   else {
     // POST message here
