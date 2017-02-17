@@ -77,12 +77,9 @@ function getRooms(str, rooms)
 //////////////////////////////////////////////////////////////////////////////////
 
 app.set('views', __dirname + '/public');//view = front end
-<<<<<<< HEAD
-//app.set('view engine', 'jade');
-=======
+
 app.set('view engine', 'jade');
->>>>>>> origin/master
-//app.set('view engine', 'html');
+
 app.set("view options", { layout: false });
 
 app.use(express.static(__dirname + '/public'));//Express helps serve files
