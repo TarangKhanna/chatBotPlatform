@@ -80,7 +80,7 @@ body {
 }
 
 /*.container {
-    
+
     height: auto;
     margin-left: 250px;
 }*/
@@ -130,7 +130,7 @@ body {
     padding:3px 6px;
     float: right;
     margin: 5px;
-    color:white; 
+    color:white;
     font-size: 16px;
     background:#0B93F6;
     border-radius:25px;
@@ -168,7 +168,7 @@ body {
     border-radius:25px;
     color: black;
     float: left;
-    margin: 5px;   
+    margin: 5px;
     &:before {
         content:"";
         position:absolute;
@@ -193,7 +193,7 @@ body {
         border-bottom-right-radius: 10px;
         -webkit-transform:translate(-30px, -2px);
     }
-} 
+}
 
 .myButton {
     margin-left: 28px;
@@ -278,7 +278,7 @@ body {
     height: 100%;
     /*background-color: #fff;*/
     margin-top: 3.3%;
-    margin-right: 1%; 
+    margin-right: 1%;
 }
 
 #middle {
@@ -336,6 +336,7 @@ body {
     width: 20%;
     margin-top: 38%;
     color:white;
+    padding-top: 10px;
 }
 
 #nameSearch {
@@ -372,7 +373,7 @@ body {
 
 
 /* form starting stylings ------------------------------- */
-.group            { 
+.group            {
     position: absolute;
     width: 70.5%;
     height: 3%;
@@ -385,22 +386,22 @@ body {
   display:block;
   width: 100%;
   border:none;
-  height: 10%;
+  height: 25px;
   border-bottom:1px solid #757575;
 }
 #messageInput:focus         { outline:none; }
 
 /* LABEL ======================================= */
 label                {
-  color:#999; 
+  color:#999;
   font-size:18px;
   font-weight:normal;
   position:absolute;
   pointer-events:none;
   left:5px;
   top:0px;
-  transition:0.2s ease all; 
-  -moz-transition:0.2s ease all; 
+  transition:0.2s ease all;
+  -moz-transition:0.2s ease all;
   -webkit-transition:0.2s ease all;
 }
 
@@ -415,20 +416,20 @@ label                {
 .bar    { position:relative; display:block; width:101%; }
 .bar:before, .bar:after     {
   content:'';
-  height:2px; 
+  height:2px;
   width:0;
-  bottom:1px; 
+  bottom:1px;
   position:absolute;
-  background:#5264AE; 
-  transition:0.2s ease all; 
-  -moz-transition:0.2s ease all; 
+  background:#5264AE;
+  transition:0.2s ease all;
+  -moz-transition:0.2s ease all;
   -webkit-transition:0.2s ease all;
 }
 .bar:before {
   left:50%;
 }
 .bar:after {
-  right:50%; 
+  right:50%;
 }
 
 /* active state */
@@ -439,9 +440,9 @@ label                {
 /* HIGHLIGHTER ================================== */
 .highlight {
   position:absolute;
-  height:60%; 
-  width:100px; 
-  top:25%; 
+  height:60%;
+  width:100px;
+  top:25%;
   left:0;
   pointer-events:none;
   opacity:0.5;
