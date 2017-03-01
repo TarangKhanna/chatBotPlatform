@@ -30,9 +30,11 @@ html
             }
 
     body(onload="startTime();")
-        div#usersInRoom  
+        div#usersInRoom
         div#right
-            div#room 
+            div#room
+            div#roomSelect
+              Other Available Rooms:
         div#middle
             div#updates
         div.container
@@ -44,6 +46,7 @@ html
                 p.userNamePara Enter Password:
                 input(type='password')#passwordInput
                 button.myButton#signUp Sign Up
+                button.myButton#reset Reset Password
             div#chatEntries.chat
                 div#chatEntriesright
             div#chatControls
@@ -53,6 +56,6 @@ html
                     span.bar
                     label Message
             div#nbUsersDiv
-                p There are 
-                    span#nbUsers 
+                p There are
+                    span#nbUsers
                     |  user(s) in the room

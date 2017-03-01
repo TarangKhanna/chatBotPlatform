@@ -102,6 +102,11 @@ body {
 	color:white;
 }
 
+#roomSelect {
+  color:white;
+  padding-top: 20px;
+}
+
 #usersInRoom {
     width: 1%;
     float: right;

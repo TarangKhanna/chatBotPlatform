@@ -50,7 +50,7 @@ function addMessage(msg, name) {
 }
 
 function sendMessage() {
-    if ($('#messageInput').val() != "") 
+    if ($('#messageInput').val() != "")
     {
         socket.emit('message', $('#messageInput').val());
         // addMessage($('#messageInput').val(), "Me"); // replace Me with current user
@@ -70,7 +70,7 @@ function setName(isSignIn) {
 				// user entered room -- make light colored
 				socket.emit('enteredRoom', "User " + $("#nameInput").val() + " entered the room");
 
-				// addMessage("User " + $("#nameInput").val() + " entered room", "Me"); 
+				// addMessage("User " + $("#nameInput").val() + " entered room", "Me");
 			    currentUser = $("#nameInput").val();
 		    	array.push(currentUser);
 		   		//console.log(array);
@@ -79,8 +79,8 @@ function setName(isSignIn) {
 		        // $('#signUp').hide();
 		  // 		  $('#signIn').hide();
 		        $("#welcomeParagraph").show();
-		        $("#welcomeParagraph").html('<div class="Welcome"><p> Hello! ' + $("#nameInput").val() + '. Welcome to our CS408 Proj.</p></div>');   
-		    // $("#userName").html('<div class="User in room"><p> ' + $("#nameInput").val() + '</p></div>');  
+		        $("#welcomeParagraph").html('<div class="Welcome"><p> Hello! ' + $("#nameInput").val() + '. Welcome to our CS408 Proj.</p></div>');
+		    // $("#userName").html('<div class="User in room"><p> ' + $("#nameInput").val() + '</p></div>');
 			}
 			else if(data == "error")
 			{
@@ -92,7 +92,7 @@ function setName(isSignIn) {
 				alert("Wrong password");
 				$("#nameForm").modal({escapeClose: false, clickClose: false, showClose: false});
 			}
-		})  
+		})
 
     // scroll automatically when new message arrives
     var $cont = $('#room');
@@ -133,7 +133,7 @@ socket.on('usersInRoom', function(msg){
 });
 
 
-// push notifications 
+// push notifications
 function notifyMe(user,message) {
   if(currentUser != user) { // do not notify user sending the message ofc
     // Let's check if the browser supports notifications
@@ -148,7 +148,7 @@ function notifyMe(user,message) {
           dir : "ltr"
       };
       var notification = new Notification(user + " Sent a message",options);
-      
+
     }
     // Otherwise, we need to ask the user for permission
     // Note, Chrome does not implement the permission static property
@@ -180,6 +180,8 @@ $(function() {
     //   'overflow': 'hidden',
     //   'height': '100%'
     // });
+    // Below line needs to print a button for all available rooms
+    $("#roomSelect").append('<button type="submit">ROOM NAME HERE</button>');
     $("#chatControls").hide();
     $("#messageInput").keypress(function(e) {
 		// alert("typing");
@@ -196,7 +198,7 @@ $(function() {
 			sendMessage();
 		}
 	});
-	
+
     $('#nameForm').modal({escapeClose: false, clickClose: false, showClose: false});
     $("#signUp").click(function() {setName(0)});
     $("#signIn").click(function() {setName(1)});
