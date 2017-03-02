@@ -181,6 +181,8 @@ $(function() {
     //   'height': '100%'
     // });
     // Below line needs to print a button for all available rooms
+    $("#hud").append('<button type="submit">CREATE ROOM HERE</button> <button type="submit">CHANGE USER</button>');
+    // Below line needs to print a button for all available rooms
     $("#roomSelect").append('<button type="submit">ROOM NAME HERE</button>');
     $("#chatControls").hide();
     $("#messageInput").keypress(function(e) {

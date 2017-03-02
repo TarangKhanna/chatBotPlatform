@@ -107,6 +107,12 @@ body {
   padding-top: 20px;
 }
 
+#hud {
+  padding-top: 15px;
+  padding-left: 30px;
+  text-align: left;
+}
+
 #usersInRoom {
     width: 1%;
     float: right;
@@ -327,7 +333,7 @@ body {
     margin: 1%;
     /*min-height: 450px;
     max-height: 450px;*/
-    height: 50%;
+    height: 60%;
     overflow-y:scroll;
     padding: 10px;
     border: 1px solid rgba(0,0,0,0.1);
@@ -337,11 +343,11 @@ body {
 }
 
 #nbUsersDiv {
-    margin: 46px auto;
+    margin: 0px auto;
     width: 20%;
-    margin-top: 38%;
+    /*margin-top: 38%;*/
     color:white;
-    padding-top: 10px;
+    /*padding-top: 10px;*/
 }
 
 #nameSearch {
@@ -388,6 +394,7 @@ body {
 #messageInput {
   font-size:18px;
   padding:10px 10px 10px 5px;
+  margin-bottom: 25px;
   display:block;
   width: 100%;
   border:none;
