@@ -364,6 +364,19 @@ def getStockInfo(req):
     stock = Share(stock_symbol)
     info = stock.get_info()
     return str(info)
+
+def getStockDividendPayDate(req):
+    result = req.get("result")
+    parameters = result.get("parameters")
+    stock_symbol = parameters.get("stock_symbol")
+    if stock_symbol is None:
+        return None
+
+    stock = Share(stock_symbol)
+    pay_date = stock.get_dividend_pay_date()
+    if pay_date is None:
+        return 'No Dividend Date Avaliable'
+    return str(pay_date)
     
 if __name__ == '__main__':
     port = int(os.getenv('PORT', 5000))
