@@ -377,6 +377,11 @@ def getStockDividendPayDate(req):
     if pay_date is None:
         return 'No Dividend Date Avaliable'
     return str(pay_date)
+
+
+def getWelcome(req):
+    response = 'Hi! I am here to help predict financial markets. My predictions are not 100% accurate!'
+    return response
     
 if __name__ == '__main__':
     port = int(os.getenv('PORT', 5000))
