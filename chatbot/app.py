@@ -354,7 +354,16 @@ def getHistoricalData(req):
     stock = Share(stock_symbol)
     return str(stock.get_historical(past_days_ago_str, now_str))
 
+def getStockInfo(req):
+    result = req.get("result")
+    parameters = result.get("parameters")
+    stock_symbol = parameters.get("stock_symbol")
+    if stock_symbol is None:
+        return None
 
+    stock = Share(stock_symbol)
+    info = stock.get_info()
+    return str(info)
     
 if __name__ == '__main__':
     port = int(os.getenv('PORT', 5000))
