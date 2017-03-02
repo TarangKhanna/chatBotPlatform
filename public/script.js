@@ -26,6 +26,13 @@ socket.on("isTyping", function(data) {
 
 
 function addMessage(msg, name) {
+    var text=msg;
+    var exp = /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig;
+    var text1=text.replace(exp, "<a href='$1'>$1</a>");
+    var exp2 =/(^|[^\/])(www\.[\S]+(\b|$))/gim;
+
+    msg = text1.replace(exp2, '$1<a target="_blank" href="http://$2">$2</a>')
+  
     if(currentUser != name) {
       $("#chatEntries").append('<div class="message"><p>' + name + ': ' + msg + '</p></div> <div class="clear"></div>');
     } else {
