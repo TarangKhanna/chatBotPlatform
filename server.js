@@ -3,7 +3,7 @@
 // Import
 var apiai = require("apiai");
 
-var app = apiai("d610ea89212f4c969fcb25f2dc7ab882");
+var app_apiai = apiai("d610ea89212f4c969fcb25f2dc7ab882");
 
 var options = {
     sessionId: 'jbkqfbebwf3'
@@ -23,7 +23,7 @@ var jade = require('jade');//support for jade
 //var html = require('html');//support for html
 var nameArray = [];	// contain all name of user in the room
 var users = 0; //number of connected users
-var rooms - 0;
+var rooms = 0;
 
 server.listen(serverPort, host, function() {
 	// print a message when the server starts listening
@@ -116,20 +116,23 @@ io.sockets.on('connection', function (socket) {
           // make sure this is not an old message
           console.log("Inform stock bot");
 
-          // var request = app.textRequest('Current price tesla', options);
+          var ask_bot = data.substr(data.indexOf('@stockbot'), data.length);
 
-          // request.on('response', function(response) {
-	         //  console.log(response);
-	         //  data.concat(response);
-	         //  // var transmit2 = {name : socket.nickname, message : response};
-	         //  // io.sockets.emit('message', transmit2);
-          // });
+          var request = app_apiai.textRequest(ask_bot, options);
 
-          // request.on('error', function(error) {
-          //     console.log(error);
-          // });
+          request.on('response', function(response) {
+	          console.log(response);
+	          var bot_response = response.result.fulfillment.displayText;
+	          console.log(bot_response)
+	          var transmit2 = {name : "stockbot", message : bot_response};
+	          io.sockets.emit('message', transmit2);
+          });
 
-          // request.end();
+          request.on('error', function(error) {
+              console.log(error);
+          });
+
+          request.end();
 
         } else {
           console.log("do not inform stock bot");
