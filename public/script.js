@@ -188,7 +188,8 @@ $(function() {
     //   'height': '100%'
     // });
     // Below line needs to print a button for all available rooms
-    $("#hud").append('<button type="submit" data-toggle="modal" data-target="#nameForm">CHANGE USER</button><button type="submit" data-toggle="modal" data-target="#roomForm">CREATE NEW ROOM WITHOUT PASSWORD</button><form style="margin: 0; padding: 0;">CREATE ROOM WITH PASSWORD:<input style="display: inline;"type="text" name="roomPass"><input type="submit" value="Create Room"></form>');
+    //$("#hud").append('<button type="submit" data-toggle="modal" data-target="#nameForm">CHANGE USER</button><button type="submit" data-toggle="modal" data-target="#roomForm">CREATE NEW ROOM WITHOUT PASSWORD</button><form style="margin: 0; padding: 0;">CREATE ROOM WITH PASSWORD:<input style="display: inline;"type="text" name="roomPass"><input type="submit" value="Create Room"></form>');
+    drawHud();
     // Below line needs to print a button for all available rooms
     getAllRooms();
     $("#chatControls").hide();
@@ -224,4 +225,8 @@ function getAllRooms() {
       $("#roomSelect").append('<button type="submit">ROOM NAME HERE</button>');
       i--;
     }
+}
+
+function drawHud() {
+    $("#hud").append('<button type="submit" data-toggle="modal" data-target="#nameForm">CHANGE USER</button><button type="submit" data-toggle="modal" data-target="#roomForm">CREATE NEW ROOM WITHOUT PASSWORD</button><form style="margin: 0; padding: 0;">CREATE ROOM WITH PASSWORD:<input style="display: inline;"type="text" name="roomPass"><input type="submit" value="Create Room"></form>');
 }

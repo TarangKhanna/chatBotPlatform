@@ -16,6 +16,7 @@ var jade = require('jade');//support for jade
 //var html = require('html');//support for html
 var nameArray = [];	// contain all name of user in the room
 var users = 0; //number of connected users
+var rooms - 0;
 
 server.listen(serverPort, host, function() {
 	// print a message when the server starts listening
@@ -123,6 +124,10 @@ io.sockets.on('connection', function (socket) {
 
 	});
 
+  socket.on('setRoom', function (data) { // Assign a name to the user
+
+	});
+
 	socket.on('setUser', function (data) {
 		// DB
 		console.log("in socket.on: " + socket.nickname);
@@ -198,6 +203,10 @@ io.sockets.on('connection', function (socket) {
 
 function reloadUsers() { // Send the count of the users to all
 	io.sockets.emit('nbUsers', {"nb": users});
+}
+
+function reloadRooms() { // Send the count of the users to all
+	io.sockets.emit('nbUsers', {"nb": rooms});
 }
 
 function reloadUsersName() {
