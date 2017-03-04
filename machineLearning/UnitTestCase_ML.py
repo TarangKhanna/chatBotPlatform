@@ -36,6 +36,12 @@ class TestMLMethods(unittest.TestCase):
 		predicted_list = predicted_values.tolist()
 		self.assertTrue(len(predicted_list) == 5)
 
+	# test predicted type
+	def testPredictionTypeNN(self):
+		prediction = predictStocks()
+		predicted_value = prediction.stocksNeuralNet('AAPL',1)
+		self.assertTrue(isinstance(predicted_value[0][0], basestring))
+
 if __name__ == '__main__':
     unittest.main()
     # unittest.testPredictionTime()
