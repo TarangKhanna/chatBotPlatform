@@ -22,9 +22,17 @@ class TestMLMethods(unittest.TestCase):
 		date = prediction.getDividendPayDate('AAPL')
 		self.assertTrue(date is not None)
 
+	# test for Linear Regression 
 	def testPredictionTime(self):
 		prediction = predictStocks()
 		predicted_values = prediction.stocksRegression('AAPL', 5)
+		predicted_list = predicted_values.tolist()
+		self.assertTrue(len(predicted_list) == 5)
+
+	# test for Neural Net
+	def testPredictionTimeNN(self):
+		prediction = predictStocks()
+		predicted_values = prediction.stocksNeuralNet('AAPL', 5)
 		predicted_list = predicted_values.tolist()
 		self.assertTrue(len(predicted_list) == 5)
 
