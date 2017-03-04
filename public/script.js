@@ -26,41 +26,44 @@ socket.on("isTyping", function(data) {
 
 
 function addMessage(msg, name) {
-    var text=msg;
-    var exp = /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig;
-    var text1=text.replace(exp, "<a href='$1'>$1</a>");
-    var exp2 =/(^|[^\/])(www\.[\S]+(\b|$))/gim;
 
-    msg = text1.replace(exp2, '$1<a target="_blank" href="http://$2">$2</a>')
-  
-    if(currentUser != name) {
-      $("#chatEntries").append('<div class="message"><p>' + name + ': ' + msg + '</p></div> <div class="clear"></div>');
-    } else {
-      $("#chatEntries").append('<div class="messageSelf"><p>' + name + ': ' + msg + '</p></div> <div class="clear"></div>');
-    }
-    console.log("SCROLL");
-    $('#chatEntries').animate({
-        scrollTop: $("#chatEntries").offset().bottom
-    }, 2000);
+  var text=msg;
+  var exp = /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig;
+  var text1=text.replace(exp, "<a href='$1'>$1</a>");
+  var exp2 =/(^|[^\/])(www\.[\S]+(\b|$))/gim;
 
-    // scroll automatically when new message arrives
-    var $cont = $('#chatEntries');
-    $cont[0].scrollTop = $cont[0].scrollHeight;
+  msg = text1.replace(exp2, '$1<a target="_blank" href="http://$2">$2</a>')
 
-    $('#messageInput').keyup(function(e) {
-        if (e.keyCode == 13) {
-            // $cont.append('<p>' + $(this).val() + '</p>');
-            $cont[0].scrollTop = $cont[0].scrollHeight;
-            $(this).val('');
-        }
-    })
+  if(currentUser != name) {
+    $("#chatEntries").append('<div class="message"><p>' + name + ': ' + msg + '</p></div> <div class="clear"></div>');
+  } else {
+    $("#chatEntries").append('<div class="messageSelf"><p>' + name + ': ' + msg + '</p></div> <div class="clear"></div>');
+  }
+
+  $('#chatEntries').animate({
+      scrollTop: $("#chatEntries").offset().bottom
+  }, 2000);
+
+  // scroll automatically when new message arrives
+  var $cont = $('#chatEntries');
+  $cont[0].scrollTop = $cont[0].scrollHeight;
+
+  $('#messageInput').keyup(function(e) {
+      if (e.keyCode == 13) {
+          // $cont.append('<p>' + $(this).val() + '</p>');
+          $cont[0].scrollTop = $cont[0].scrollHeight;
+          $(this).val('');
+      }
+  })
 }
 
 function sendMessage() {
     if ($('#messageInput').val() != "")
     {
-        socket.emit('message', $('#messageInput').val());
+        var msg = $('#messageInput').val();
+        socket.emit('message', msg);
         // addMessage($('#messageInput').val(), "Me"); // replace Me with current user
+
         $('#messageInput').val(''); // clear
     }
 }

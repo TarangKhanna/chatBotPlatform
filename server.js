@@ -1,6 +1,13 @@
 // var serverPort = 43543;
 // server side
 // Import
+var apiai = require("apiai");
+
+var app = apiai("d610ea89212f4c969fcb25f2dc7ab882");
+
+var options = {
+    sessionId: 'jbkqfbebwf3'
+};
 
 //bluemix initialization
 var serverPort = (process.env.VCAP_APP_PORT || 3000);//process.env finds the port for bluemix. we || it so that if we're not on bluemix, we can run locally on laptop
@@ -27,6 +34,8 @@ server.listen(serverPort, host, function() {
 //to include the database.js code into server.js
 //every function/variable from database.js will be accessed as db.func() or db.var
 var db = require('./database.js');
+
+
 
 function getMsg(name, text)
 {
@@ -97,14 +106,37 @@ app.get('/settings', function(req, res){
   //res.render('settings.html');
 });
 
-
-//actual socket shit happens here
+//actual socket stuff
 io.sockets.on('connection', function (socket) {
     // new connection
 	socket.on('message', function (data) { // Broadcast the message
-		var transmit = {name : socket.nickname, message : data};
-		io.sockets.emit('message', transmit);
+		
+		console.log(data);
+        if (data.indexOf('@stockbot') > -1) {
+          // make sure this is not an old message
+          console.log("Inform stock bot");
 
+          // var request = app.textRequest('Current price tesla', options);
+
+          // request.on('response', function(response) {
+	         //  console.log(response);
+	         //  data.concat(response);
+	         //  // var transmit2 = {name : socket.nickname, message : response};
+	         //  // io.sockets.emit('message', transmit2);
+          // });
+
+          // request.on('error', function(error) {
+          //     console.log(error);
+          // });
+
+          // request.end();
+
+        } else {
+          console.log("do not inform stock bot");
+        }
+
+        var transmit = {name : socket.nickname, message : data};
+		io.sockets.emit('message', transmit);
 		console.log("user "+ transmit['name'] +" said \""+data+"\"");
 	});
 
