@@ -239,6 +239,10 @@ function createChatroom(username, name_of_room)
 	}), username, name_of_room);
 }
 
+// function switchRoom(switchTo) {
+	// currentRoom = switchTo;
+// }
+
 function createChatroomCallback(new_ref, username, name_of_room)
 {
 	//get user's room field and add to it
