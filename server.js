@@ -24,6 +24,8 @@ var jade = require('jade');//support for jade
 var nameArray = [];	// contain all name of user in the room
 var users = 0; //number of connected users
 var rooms = 0;
+// rooms which are currently available in chat
+var rooms = ['room1','room2','room3'];
 
 server.listen(serverPort, host, function() {
 	// print a message when the server starts listening
@@ -123,23 +125,23 @@ io.sockets.on('connection', function (socket) {
           request.on('response', function(response) {
 	          console.log(response);
 	          var bot_response = response.result.fulfillment.displayText;
-	          console.log(bot_response)
+	          // console.log(bot_response)
 	          var transmit2 = {name : "stockbot", message : bot_response};
-	          io.sockets.emit('message', transmit2);
+	          // io.sockets.emit('message', transmit2);
+	          io.sockets.in(socket.room).emit('message', transmit2);
           });
-
           request.on('error', function(error) {
               console.log(error);
           });
-
           request.end();
-
         } else {
           console.log("do not inform stock bot");
         }
 
         var transmit = {name : socket.nickname, message : data};
-		io.sockets.emit('message', transmit);
+		// io.sockets.emit('message', transmit);
+	    io.sockets.in(socket.room).emit('message', transmit);
+
 		console.log("user "+ transmit['name'] +" said \""+data+"\"");
 	});
 
@@ -177,7 +179,16 @@ io.sockets.on('connection', function (socket) {
 							name = data['username'];
 							nameArray.push(data['username']);
 							socket.nickname = data['username'];
+							// assign room to user, room1 is default
+
+							socket.room = 'room1';
+							socket.join('room1');
+							socket.emit('message', 'SERVER', 'you have connected to room1');
+							socket.broadcast.to('room1').emit('message', 'SERVER', name + ' has connected to this room');
 							socket.emit('nameStatus', 'ok');
+
+							// will send event to frontend to change the users room
+							socket.emit('message', rooms, 'room1');
 							users += 1; // only increment when name is not taken
 							reloadUsers();
 							reloadUsersName();
@@ -186,6 +197,7 @@ io.sockets.on('connection', function (socket) {
 						{
 							socket.emit('nameStatus', 'error') // Send the error
 						}
+
 						reloadUsersName();
 					}
 					else
@@ -220,6 +232,20 @@ io.sockets.on('connection', function (socket) {
 		}
 	});
 
+	socket.on('switchRoom', function(newroom){
+		// leave the current room (stored in session)
+		socket.leave(socket.room);
+		// join new room, received as function parameter
+		socket.join(newroom);
+		socket.emit('message', 'SERVER', 'you have connected to '+ newroom);
+		// sent message to OLD room
+		socket.broadcast.to(socket.room).emit('message', 'SERVER', socket.username+' has left this room');
+		// update socket session room title
+		socket.room = newroom;
+		socket.broadcast.to(newroom).emit('message', 'SERVER', socket.username+' has joined this room');
+		socket.emit('updaterooms', rooms, newroom);
+	});
+
 	socket.on('disconnect', function () { // Disconnection of the client
 		// sent by socket io automatically
 		console.log("Disconnection");
@@ -231,6 +257,7 @@ io.sockets.on('connection', function (socket) {
 			users -= 1;
 			reloadUsers();
 			reloadUsersName();
+			socket.leave(socket.room);
 		}
 
 	});
