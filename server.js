@@ -259,7 +259,6 @@ io.sockets.on('connection', function (socket) {
 			reloadUsersName();
 			socket.leave(socket.room);
 		}
-
 	});
 });
 

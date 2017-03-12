@@ -286,7 +286,7 @@ function enterChatroom(room, func)
 {
 	var room_ID = room;
 	currentRoom = room_ID;
-	console.log("current room better be fucking defined here = " + currentRoom);
+	console.log("current room = " + currentRoom);
 	//remove previous callback
 	firebase_ref.off();
 	//update pointer to the room
@@ -343,7 +343,7 @@ function searchUsers()
 8. Send message (to current room)
 	a) pushes to current room
 */
-function sendMessage(user, message, emotion)
+function sendMessage(user, message)
 {
 	firebase_ref.off();
 	console.log("Current room = ", currentRoom);
@@ -356,7 +356,6 @@ function sendMessage(user, message, emotion)
 		roomlist_ref.child("Messages").push({
 					name: user,
 					message: message,
-					emotion: emotion,
 					date: new Date().getTime()
 				}
 		);
