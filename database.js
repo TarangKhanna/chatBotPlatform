@@ -232,7 +232,6 @@ function createChatroom(username, name_of_room)
 			"0":{
 				name: "Watson",
 				message: "Welcome!",
-				emotion: "Happy",
 				date: new Date().getTime()
 			}
 		}
@@ -343,7 +342,7 @@ function searchUsers()
 8. Send message (to current room)
 	a) pushes to current room
 */
-function sendMessage(user, message)
+function sendMessage(user, message, currentRoom)
 {
 	firebase_ref.off();
 	console.log("Current room = ", currentRoom);

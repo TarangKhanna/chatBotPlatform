@@ -84,7 +84,7 @@ function getRooms(str, rooms)
 
 //db.enterChatroom({room_ID: "-KFwxfEIgyC_z6omvB0P", name_of_room: "CS Majors Only"}, getMsg);
 //db.addUsersToChatroom(addTheseUsers, {room_ID: "-KFwxfEIgyC_z6omvB0P", name_of_room: "CS Majors Only"});
-//db.sendMessage("Jun Ming", "no", {room_ID: "-KFwxfEIgyC_z6omvB0P", name_of_room: "CS Majors Only"});
+// db.sendMessage("Tarang Khanna", "Hi", "-KFwxfEIgyC_z6omvB0P");
 //db.test();//test function
 //////////////////////////////////////////////////////////////////////////////////
 
@@ -135,6 +135,7 @@ io.sockets.on('connection', function (socket) {
           });
           request.end();
         } else {
+        	db.sendMessage(socket.nickname, data, "-KFwxfEIgyC_z6omvB0P");
           console.log("do not inform stock bot");
         }
 
