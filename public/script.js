@@ -230,6 +230,12 @@ function getAllRooms() {
     }
 }
 
+function joinRoom(){
+    // send request to server to join new rooms
+    // Probably using socket.io
+
+}
+
 function drawHud() {
     $("#hud").append('<button type="submit" data-toggle="modal" data-target="#nameForm">CHANGE USER</button><button type="submit" data-toggle="modal" data-target="#roomForm">CREATE NEW ROOM WITHOUT PASSWORD</button><form style="margin: 0; padding: 0;">CREATE ROOM WITH PASSWORD:<input style="display: inline;"type="text" name="roomPass"><input type="submit" value="Create Room"></form>');
 }
