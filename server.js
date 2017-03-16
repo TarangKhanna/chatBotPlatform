@@ -158,17 +158,9 @@ io.sockets.on('connection', function (socket) {
    		io.sockets.emit("isTyping", {isTyping: data.isTyping, person: data.person});
 	});
 
-	socket.on('setName', function (data) { // Assign a name to the user
-
-	});
-
-  socket.on('setRoom', function (data) { // Assign a name to the user
-
-	});
-
 	socket.on('setUser', function (data) {
 		// DB
-		console.log("in socket.on: " + socket.nickname);
+		// console.log("in socket.on: " + socket.nickname);
 		if(data['isSignIn']) {
 			// sign in
 			db.signin(data['username'], data['password'], function(str, room)
@@ -187,6 +179,7 @@ io.sockets.on('connection', function (socket) {
 							socket.emit('message', 'SERVER', 'you have connected to room1');
 							socket.broadcast.to('room1').emit('message', 'SERVER', name + ' has connected to this room');
 							socket.emit('nameStatus', 'ok');
+							socket.emit('updaterooms', rooms, 'room1');
 
 							// will send event to frontend to change the users room
 							socket.emit('message', rooms, 'room1');
@@ -246,6 +239,18 @@ io.sockets.on('connection', function (socket) {
 		socket.broadcast.to(newroom).emit('message', 'SERVER', socket.username+' has joined this room');
 		socket.emit('updaterooms', rooms, newroom);
 	});
+
+	socket.on('addRoom', function(newroom) {
+		socket.leave(socket.room);
+		// join new room, received as function parameter
+		socket.join(newroom);
+		socket.emit('message', 'SERVER', 'you have connected to '+ newroom);
+		socket.broadcast.to(socket.room).emit('message', 'SERVER', socket.username+' has left this room');
+		socket.room = newroom;
+		rooms.push(newroom);
+		socket.emit('updaterooms', rooms, newroom);
+	});
+
 
 	socket.on('disconnect', function () { // Disconnection of the client
 		// sent by socket io automatically

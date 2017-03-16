@@ -29,13 +29,14 @@ function switchRoom(room) {
 }
 
 socket.on('updaterooms', function(rooms, current_room) {
-    $('#rooms').empty();
+
+    $('#roomSelect').empty();
     $.each(rooms, function(key, value) {
       if(value == current_room){
-        $('#rooms').append('<div>' + value + '</div>');
+        $('#roomSelect').append('<div>' + value + '</div>');
       }
       else {
-        $('#rooms').append('<div><a href="#" onclick="switchRoom(\''+value+'\')">' + value + '</a></div>');
+        $('#roomSelect').append('<div><a href="#" onclick="switchRoom(\''+value+'\')">' + value + '</a></div>');
       }
     });
 });
@@ -81,6 +82,16 @@ function sendMessage() {
         // addMessage($('#messageInput').val(), "Me"); // replace Me with current user
 
         $('#messageInput').val(''); // clear
+    }
+}
+
+// add room
+function addNewRoom() {
+    if ($('#roomInput').val() != "")
+    {
+        var roomName = $('#roomInput').val();
+        socket.emit('addRoom', roomName);
+        $('#roomInput').val(''); // clear
     }
 }
 
@@ -150,11 +161,11 @@ socket.on('nbUsers', function(msg) {
 });
 
 socket.on('usersInRoom', function(msg){
-    $("#room").empty(); // clear, users might disconnect, and its appending
-    $("#room").append("Users in room: <br/>")
-    for(i = 0; i < msg.un.length; i++){
-      $("#room").append("- " + msg.un[i] + "<br/>");
-    }
+    // $("#roomSelect").empty(); // clear, users might disconnect, and its appending
+    // $("#roomSelect").append("Users in room: <br/>")
+    // for(i = 0; i < msg.un.length; i++){
+    //   $("#roomSelect").append("- " + msg.un[i] + "<br/>");
+    // }
     // $("#updates").append("------------");
 });
 
@@ -231,6 +242,8 @@ $(function() {
     $('#nameForm').modal({escapeClose: false, clickClose: false, showClose: false});
     $("#signUp").click(function() {setName(0)});
     $("#signIn").click(function() {setName(1)});
+    createRoom
+    $("#createRoom").click(function() {addNewRoom();});
     $("#").click(function() {setName()});
     $("#submit").click(function() {sendMessage();});
     $("#welcomeParagraph").hide();
@@ -240,10 +253,10 @@ function getAllRooms() {
 
     var i = 5;
 
-    while(i > 0){
-      $("#roomSelect").append('<button type="submit">ROOM NAME HERE</button>');
-      i--;
-    }
+    // while(i > 0){
+    //   $("#roomSelect").append('<button type="submit">ROOM NAME HERE</button>');
+    //   i--;
+    // }
 }
 
 function joinRoom(){
@@ -253,5 +266,5 @@ function joinRoom(){
 }
 
 function drawHud() {
-    $("#hud").append('<button type="submit" data-toggle="modal" data-target="#nameForm">CHANGE USER</button><button type="submit" data-toggle="modal" data-target="#roomForm">CREATE NEW ROOM WITHOUT PASSWORD</button><form style="margin: 0; padding: 0;">CREATE ROOM WITH PASSWORD:<input style="display: inline;"type="text" name="roomPass"><input type="submit" value="Create Room"></form>');
+    // $("#right").append('<button type="submit" data-toggle="modal" data-target="#roomForm">CREATE NEW ROOM WITHOUT PASSWORD</button><form style="margin: 0; padding: 0; ">CREATE ROOM WITH PASSWORD:<input style="display: inline;"type="text" name="roomPass"><input type="submit" value="Create Room"></form>');
 }

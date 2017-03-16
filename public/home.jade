@@ -31,8 +31,13 @@ html
 
     body(onload="startTime();")
         div#usersInRoom
+
         div#right
             div#rooms
+                p.userNamePara Enter Room Name:
+                input(type='text')#roomInput
+                button.myRoomButton#createRoom New Room
+
             div#roomSelect
               Other Available Rooms:
         div#middle
