@@ -3,7 +3,7 @@ var socket = io.connect();
 // to see if user is typing
 var typing = false;
 var timeout = undefined;
-var userCount = 1;
+var userCount = 0;
 var currentUser = '';
 var array = [];
 
@@ -16,8 +16,8 @@ function timeoutFunction(){
 socket.on("isTyping", function(data) {
   if (data.isTyping) {
     if ($("#"+data.person+"").length === 0) {
-      $("#updates").append("<li id='"+ data.person +"'><span class='text-muted'><small><i class='fa fa-keyboard-o'></i>" + data.person + " is typing...</small></li>");
-      timeout = setTimeout(timeoutFunction, 5000);
+      //$("#updates").append("<li id='"+ data.person +"'><span class='text-muted'><small><i class='fa fa-keyboard-o'></i>" + data.person + " is typing...</small></li>");
+      //timeout = setTimeout(timeoutFunction, 5000);
     }
   } else {
     $("#"+data.person+"").remove();
@@ -76,6 +76,14 @@ function addMessage(msg, name) {
 
 function sendMessage() {
     if ($('#messageInput').val() != "")
+    {
+        var msg = $('#messageInput').val();
+        socket.emit('message', msg);
+        // addMessage($('#messageInput').val(), "Me"); // replace Me with current user
+
+        $('#messageInput').val(''); // clear
+    }
+    if ($('#messageInput').val() == "")
     {
         var msg = $('#messageInput').val();
         socket.emit('message', msg);
