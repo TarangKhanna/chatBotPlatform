@@ -104,8 +104,8 @@ function addNewRoom() {
 }
 
 function setName(isSignIn) {
-    if ($("#nameInput").val() != "")
-    {
+    //if ($("#nameInput").val() != "")
+    //{
 		$.modal.close();
 		socket.emit('setName', $("#nameInput").val());
 		socket.emit('setUser', {username: $("#nameInput").val(), password: $("#passwordInput").val(), isSignIn: isSignIn});
@@ -150,7 +150,7 @@ function setName(isSignIn) {
             $(this).val('');
         }
     })
-  }
+  //}
 }
 
 
