@@ -22,7 +22,7 @@ var http = require('http')//for node js to connect to internets
 var jade = require('jade');//support for jade
 //var html = require('html');//support for html
 var nameArray = [];	// contain all name of user in the room
-var users = 0; //number of connected users
+var users = 1; //number of connected users
 var rooms = 0;
 // rooms which are currently available in chat
 var rooms = ['room1','room2','room3'];
@@ -112,7 +112,7 @@ app.get('/settings', function(req, res){
 io.sockets.on('connection', function (socket) {
     // new connection
 	socket.on('message', function (data) { // Broadcast the message
-		
+
 		console.log(data);
         if (data.indexOf('@stockbot') > -1) {
           // make sure this is not an old message
@@ -269,13 +269,13 @@ io.sockets.on('connection', function (socket) {
 });
 
 function reloadUsers() { // Send the count of the users to all
-	io.sockets.emit('nbUsers', {"nb": users});
+	io.sockets.emit('nbUsers', {"nb" : users});
 }
 
 function reloadRooms() { // Send the count of the users to all
-	io.sockets.emit('nbUsers', {"nb": rooms});
+	//io.sockets.emit('nbUsers', {"nb": rooms});
 }
 
 function reloadUsersName() {
-	io.sockets.emit('usersInRoom', {"un": nameArray});
+	//io.sockets.emit('usersInRoom', {"un": nameArray});
 }

@@ -3,7 +3,7 @@ var socket = io.connect();
 // to see if user is typing
 var typing = false;
 var timeout = undefined;
-var userCount = 0;
+var userCount = 1;
 var currentUser = '';
 var array = [];
 
