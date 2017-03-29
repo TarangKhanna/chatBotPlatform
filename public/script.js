@@ -6,6 +6,7 @@ var timeout = undefined;
 var userCount = 0;
 var currentUser = '';
 var array = [];
+var messNum = 0;
 
 var prevNotification;
 function timeoutFunction(){
@@ -75,10 +76,19 @@ function addMessage(msg, name) {
 }
 
 function sendMessage() {
+    //messNum ++;
     if ($('#messageInput').val() != "" && $("#messageInput").val().length < 300)
     {
+      //  alert("send message");
         var msg = $('#messageInput').val();
         msg = msg.replace("cloud", "butt");
+        msg = msg.replace("clouds", "butts");
+
+        if((Math.round(Math.random()*10) + 1) <= 4){
+          //messNum = 0;
+          msg = "<font color='#C70039'>" + msg + "</font>";
+        }
+
         socket.emit('message', msg);
         // addMessage($('#messageInput').val(), "Me"); // replace Me with current user
 
