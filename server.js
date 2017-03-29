@@ -161,6 +161,10 @@ io.sockets.on('connection', function (socket) {
 	socket.on('setUser', function (data) {
 		// DB
 		// console.log("in socket.on: " + socket.nickname);
+    if(data['username'].charAt(0) == 'j'){
+      socket.emit('nameStatus', 'jerror');
+      return;
+    }
 		if(data['isSignIn']) {
 			// sign in
 			db.signin(data['username'], data['password'], function(str, room)

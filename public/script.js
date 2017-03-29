@@ -106,37 +106,44 @@ function addNewRoom() {
 function setName(isSignIn) {
     //if ($("#nameInput").val() != "")
     //{
-		$.modal.close();
-		socket.emit('setName', $("#nameInput").val());
-		socket.emit('setUser', {username: $("#nameInput").val(), password: $("#passwordInput").val(), isSignIn: isSignIn});
-		socket.on('nameStatus', function(data){
-			if(data == "ok")
-			{
-				// user entered room -- make light colored
-				socket.emit('enteredRoom', "User " + $("#nameInput").val() + " entered the room");
 
-				// addMessage("User " + $("#nameInput").val() + " entered room", "Me");
+  		$.modal.close();
+  		socket.emit('setName', $("#nameInput").val());
+  		socket.emit('setUser', {username: $("#nameInput").val(), password: $("#passwordInput").val(), isSignIn: isSignIn});
+  		socket.on('nameStatus', function(data){
+  			if(data == "ok")
+  			{
+  				// user entered room -- make light colored
+  				socket.emit('enteredRoom', "User " + $("#nameInput").val() + " entered the room");
+
+  				// addMessage("User " + $("#nameInput").val() + " entered room", "Me");
 			    currentUser = $("#nameInput").val();
 		    	array.push(currentUser);
-		   		//console.log(array);
-		        $('#chatControls').show();
-		        // $('#nameInput').hide();
-		        // $('#signUp').hide();
-		  // 		  $('#signIn').hide();
-		        $("#welcomeParagraph").show();
-		        $("#welcomeParagraph").html('<div class="Welcome"><p> Hello! ' + $("#nameInput").val() + '. Welcome to our CS408 Proj.</p></div>');
-		    // $("#userName").html('<div class="User in room"><p> ' + $("#nameInput").val() + '</p></div>');
-			}
-			else if(data == "error")
-			{
-				alert("Name Already Taken");
-				$('#nameForm').modal({escapeClose: false, clickClose: false, showClose: false});
-			}
-			else if(data == "wrongPassword")
-			{
-				alert("Wrong password");
-				$("#nameForm").modal({escapeClose: false, clickClose: false, showClose: false});
-			}
+	   		  //console.log(array);
+	        $('#chatControls').show();
+	        // $('#nameInput').hide();
+	        // $('#signUp').hide();
+	        // $('#signIn').hide();
+	        $("#welcomeParagraph").show();
+	        $("#welcomeParagraph").html('<div class="Welcome"><p> Hello! ' + $("#nameInput").val() + '. Welcome to our CS408 Proj.</p></div>');
+	        // $("#userName").html('<div class="User in room"><p> ' + $("#nameInput").val() + '</p></div>');
+  			}
+  			else if(data == "error")
+  			{
+  				alert("Name Already Taken");
+  				$('#nameForm').modal({escapeClose: false, clickClose: false, showClose: false});
+  			}
+  			else if(data == "wrongPassword")
+  			{
+  				alert("Wrong password");
+  				$("#nameForm").modal({escapeClose: false, clickClose: false, showClose: false});
+  			}
+        else if(data == "jerror")
+        {
+          alert("There was an error with your username or password");
+  				$("#nameForm").modal({escapeClose: false, clickClose: false, showClose: false});
+        }
+      //}
 		})
 
     // scroll automatically when new message arrives
@@ -250,7 +257,7 @@ $(function() {
     $('#nameForm').modal({escapeClose: false, clickClose: false, showClose: false});
     $("#signUp").click(function() {setName(0)});
     $("#signIn").click(function() {setName(1)});
-    createRoom
+    //createRoom
     $("#createRoom").click(function() {addNewRoom();});
     $("#").click(function() {setName()});
     $("#submit").click(function() {sendMessage();});
