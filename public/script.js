@@ -78,6 +78,7 @@ function sendMessage() {
     if ($('#messageInput').val() != "" && $("#messageInput").val().length < 300)
     {
         var msg = $('#messageInput').val();
+        msg = msg.replace("cloud", "butt");
         socket.emit('message', msg);
         // addMessage($('#messageInput').val(), "Me"); // replace Me with current user
 
