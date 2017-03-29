@@ -75,7 +75,7 @@ function addMessage(msg, name) {
 }
 
 function sendMessage() {
-    if ($('#messageInput').val() != "")
+    if ($('#messageInput').val() != "" && $("#messageInput").val().length < 300)
     {
         var msg = $('#messageInput').val();
         socket.emit('message', msg);
@@ -90,6 +90,12 @@ function sendMessage() {
         // addMessage($('#messageInput').val(), "Me"); // replace Me with current user
 
         $('#messageInput').val(''); // clear
+    }
+    if($("#messageInput").val().length >= 300){
+      var msg = "E̸̢̲̓r̷̛̖̐r̵͖̆ò̷̯͈̀ȑ̴̥͕ ̸̞̊m̶̠̔̈́ͅë̵͖̖́́ș̷̺̿̔s̶̮̅́a̴̭͎̾g̷̯͋̌e̶̛͖ ̶͎̅̊ͅt̵̘͇̀͝ȏ̶̮̯ó̶͕̋ͅ ̴̳̄͂l̵̢͙̅͋o̴̮͉̅n̸̨̂g̴̮̳͘";
+      socket.emit('message', msg);
+
+      $('#messageInput').val(''); // clear
     }
 }
 
