@@ -241,14 +241,16 @@ io.sockets.on('connection', function (socket) {
 	});
 
 	socket.on('addRoom', function(newroom) {
-		socket.leave(socket.room);
-		// join new room, received as function parameter
-		socket.join(newroom);
-		socket.emit('message', 'SERVER', 'you have connected to '+ newroom);
-		socket.broadcast.to(socket.room).emit('message', 'SERVER', socket.username+' has left this room');
-		socket.room = newroom;
-		rooms.push(newroom);
-		socket.emit('updaterooms', rooms, newroom);
+		if(!rooms.contains(newroom)) {
+			socket.leave(socket.room);
+			// join new room, received as function parameter
+			socket.join(newroom);
+			socket.emit('message', 'SERVER', 'you have connected to '+ newroom);
+			socket.broadcast.to(socket.room).emit('message', 'SERVER', socket.username+' has left this room');
+			socket.room = newroom;
+			rooms.push(newroom);
+			socket.emit('updaterooms', rooms, newroom);
+		}
 	});
 
 
