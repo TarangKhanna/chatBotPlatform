@@ -241,7 +241,8 @@ io.sockets.on('connection', function (socket) {
 	});
 
 	socket.on('addRoom', function(newroom) {
-		if(!rooms.contains(newroom)) {
+
+		if(rooms.indexOf(newroom) == -1) {
 			socket.leave(socket.room);
 			// join new room, received as function parameter
 			socket.join(newroom);
