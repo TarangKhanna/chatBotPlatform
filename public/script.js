@@ -96,7 +96,7 @@ function addNewRoom() {
 }
 
 function setName(isSignIn) {
-    if ($("#nameInput").val() != "")
+    if ($("#nameInput").val() != "" && $("#passwordInput").val() != "")
     {
 		$.modal.close();
 		socket.emit('setName', $("#nameInput").val());
@@ -242,7 +242,7 @@ $(function() {
     $('#nameForm').modal({escapeClose: false, clickClose: false, showClose: false});
     $("#signUp").click(function() {setName(0)});
     $("#signIn").click(function() {setName(1)});
-    createRoom
+    
     $("#createRoom").click(function() {addNewRoom();});
     $("#").click(function() {setName()});
     $("#submit").click(function() {sendMessage();});
