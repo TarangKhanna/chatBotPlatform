@@ -152,7 +152,7 @@ String.prototype.contains = function(it) { return this.indexOf(it) != -1; };
 socket.on('message', function(data) {
     addMessage(data['message'], data['name']);
     console.log(data);
-    notifyMe(data['name'],data['message']);
+    // notifyMe(data['name'],data['message']);
 });
 
 socket.on('nbUsers', function(msg) {

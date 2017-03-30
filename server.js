@@ -37,8 +37,6 @@ server.listen(serverPort, host, function() {
 //every function/variable from database.js will be accessed as db.func() or db.var
 var db = require('./database.js');
 
-
-
 function getMsg(name, text)
 {
 	var message = {name: name, message: text};
