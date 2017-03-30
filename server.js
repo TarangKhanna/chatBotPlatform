@@ -10,8 +10,8 @@ var options = {
 };
 
 //bluemix initialization
-var serverPort = (process.env.VCAP_APP_PORT || 3000);//process.env finds the port for heroky
-var host = (process.env.VCAP_APP_HOST || '0.0.0.0');//same with host
+var serverPort = (process.env.PORT || 3000);//process.env finds the port for bluemix. we || it so that if we're not on bluemix, we can run locally on laptop
+var host = (process.env.HOST  || '0.0.0.0');//same with host
 
 //express init
 var express = require('express'), app = express();
