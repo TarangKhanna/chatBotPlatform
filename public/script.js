@@ -112,12 +112,10 @@ function sendMessage() {
 
 // add room
 function addNewRoom() {
-    if ($('#roomInput').val() != "")
-    {
-        var roomName = $('#roomInput').val();
-        socket.emit('addRoom', roomName);
-        $('#roomInput').val(''); // clear
-    }
+      // accepts empty room name bug
+      var roomName = $('#roomInput').val();
+      socket.emit('addRoom', roomName);
+      $('#roomInput').val(''); // clear
 }
 
 function setName(isSignIn) {
