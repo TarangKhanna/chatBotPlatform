@@ -119,12 +119,17 @@ function addNewRoom() {
 }
 
 function setName(isSignIn) {
-    //if ($("#nameInput").val() != "")
-    //{
+    if ($("#nameInput").val() == "")
+    {
+        socket.emit('setUser', {username: "(empty)", password: $("#passwordInput").val(), isSignIn: isSignIn});
+    }
+    else {
+      socket.emit('setUser', {username: $("#nameInput").val(), password: $("#passwordInput").val(), isSignIn: isSignIn});
+    }
 
   		$.modal.close();
   		socket.emit('setName', $("#nameInput").val());
-  		socket.emit('setUser', {username: $("#nameInput").val(), password: $("#passwordInput").val(), isSignIn: isSignIn});
+  		//socket.emit('setUser', {username: $("#nameInput").val(), password: $("#passwordInput").val(), isSignIn: isSignIn});
   		socket.on('nameStatus', function(data){
   			if(data == "ok")
   			{
