@@ -1,0 +1,36 @@
+{
+  "name": "stockbot",
+  "version": "1.0.0",
+  "description": "stock bot messenger platform",
+  "main": "server.js",
+  "dependencies": {
+    "cfenv": "^1.0.3",
+    "express": "^4.13.4",
+    "firebase": "^2.4.2",
+    "jQuery": "^1.7.4",
+    "jsdom": "^8.4.0",
+    "mongodb": "^2.1.16",
+    "socket.io": "^1.4.5",
+    "watson-developer-cloud": "^1.4.1", 
+    "apiai": "^4.0.1", 
+    "jade": "^1.11.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TarangKhanna/stockbot.git"
+  },
+  "keywords": [
+    "none"
+  ],
+  "author": "408 team",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/TarangKhanna/stockbot/issues"
+  },
+  "homepage": "https://github.com/TarangKhanna/stockbot#readme"
+}
