@@ -193,12 +193,12 @@ socket.on('nbUsers', function(msg) {
 });
 
 socket.on('usersInRoom', function(msg){
-    // $("#roomSelect").empty(); // clear, users might disconnect, and its appending
-    // $("#roomSelect").append("Users in room: <br/>")
-    // for(i = 0; i < msg.un.length; i++){
-    //   $("#roomSelect").append("- " + msg.un[i] + "<br/>");
-    // }
-    // $("#updates").append("------------");
+     //$("#usersInRoom").empty(); // clear, users might disconnect, and its appending
+     //$("#usersInRoom").append("Users in room: <br/>")
+     //for(i = 0; i < msg.un.length; i++){
+    //   $("#usersInRoom").append("- " + msg.un[i] + "<br/>");
+     //}
+     //$("#updates").append("------------");
 });
 
 
