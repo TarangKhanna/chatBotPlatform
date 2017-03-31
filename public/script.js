@@ -52,10 +52,19 @@ function addMessage(msg, name) {
 
   msg = text1.replace(exp2, '$1<a target="_blank" href="http://$2">$2</a>')
 
+  var mod_username = name;
+  if(name.length > 3) {
+    console.log("len is greater");
+    console.log(name);
+
+      // remove last two chars
+      mod_username = currentUser.substring(0, currentUser.length-2);
+  }
+
   if(currentUser != name) {
-    $("#chatEntries").append('<div class="message"><p>' + name + ': ' + msg + '</p></div> <div class="clear"></div>');
+    $("#chatEntries").append('<div class="message"><p>' + mod_username + ': ' + msg + '</p></div> <div class="clear"></div>');
   } else {
-    $("#chatEntries").append('<div class="messageSelf"><p>' + name + ': ' + msg + '</p></div> <div class="clear"></div>');
+    $("#chatEntries").append('<div class="messageSelf"><p>' + mod_username + ': ' + msg + '</p></div> <div class="clear"></div>');
   }
 
   $('#chatEntries').animate({
@@ -124,7 +133,7 @@ function setName(isSignIn) {
         socket.emit('setUser', {username: "(empty)", password: $("#passwordInput").val(), isSignIn: isSignIn});
     }
     else {
-      socket.emit('setUser', {username: $("#nameInput").val(), password: $("#passwordInput").val(), isSignIn: isSignIn});
+        socket.emit('setUser', {username: $("#nameInput").val(), password: $("#passwordInput").val(), isSignIn: isSignIn});
     }
 
   		$.modal.close();
@@ -138,6 +147,7 @@ function setName(isSignIn) {
 
   				// addMessage("User " + $("#nameInput").val() + " entered room", "Me");
 			    currentUser = $("#nameInput").val();
+          
 		    	array.push(currentUser);
 	   		  //console.log(array);
 	        $('#chatControls').show();
@@ -145,7 +155,7 @@ function setName(isSignIn) {
 	        // $('#signUp').hide();
 	        // $('#signIn').hide();
 	        $("#welcomeParagraph").show();
-	        $("#welcomeParagraph").html('<div class="Welcome"><p> Hello! ' + $("#nameInput").val() + '. Welcome to our CS408 Proj.</p></div>');
+	        $("#welcomeParagraph").html('<div class="Welcome"><p> Hello! ' + currentUser + '. Welcome to our CS408 Proj.</p></div>');
 	        // $("#userName").html('<div class="User in room"><p> ' + $("#nameInput").val() + '</p></div>');
   			}
   			else if(data == "error")
@@ -254,6 +264,13 @@ $(function() {
     // });
     // Below line needs to print a button for all available rooms
     //$("#hud").append('<button type="submit" data-toggle="modal" data-target="#nameForm">CHANGE USER</button><button type="submit" data-toggle="modal" data-target="#roomForm">CREATE NEW ROOM WITHOUT PASSWORD</button><form style="margin: 0; padding: 0;">CREATE ROOM WITH PASSWORD:<input style="display: inline;"type="text" name="roomPass"><input type="submit" value="Create Room"></form>');
+    if ($.browser.mozilla) {
+      console.log("is firefox");
+        setTimeout(function(){
+           window.location.reload(1);
+        }, 20000);
+    }
+
     drawHud();
     // Below line needs to print a button for all available rooms
     getAllRooms();
@@ -277,6 +294,13 @@ $(function() {
     $('#nameForm').modal({escapeClose: false, clickClose: false, showClose: false});
     $("#signUp").click(function() {setName(0)});
     $("#signIn").click(function() {setName(1)});
+
+    $("#sendMes").click(function() {
+      // double click sometimes to send message
+      $("#sendMes").click(function(){
+                sendMessage();
+            })
+     });
     //createRoom
     $("#createRoom").click(function() {addNewRoom();});
     $("#").click(function() {setName()});

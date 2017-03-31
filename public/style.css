@@ -251,6 +251,33 @@ body {
     top:1px;
 }
 
+.myMessageButton {
+    margin-left: 28px;
+    margin-top: 5px;
+
+    background-color:#44c767;
+    -moz-border-radius:28px;
+    -webkit-border-radius:28px;
+    border-radius:28px;
+    border:1px solid #18ab29;
+    display:inline-block;
+    cursor:pointer;
+    color:#ffffff;
+    font-family:Arial;
+    font-size:14px;
+    padding:6px 10px;
+    text-decoration:none;
+    text-shadow:0px 1px 0px #2f6627;
+}
+
+.myMessageButton:hover {
+    background-color:#5cbf2a;
+}
+
+.myMessageButton:active {
+    position:relative;
+    top:1px;
+}
 
 #welcomeParagraph {
     /*color:#00b0ff;*/
@@ -426,14 +453,12 @@ body {
     margin-left: 650px;
 }*/
 
-
-
 /* form starting stylings ------------------------------- */
 .group            {
     position: absolute;
     width: 70.5%;
     height: 2%;
-    margin-top: 38.5%;
+    margin-top: 32.5%;
     margin-left: 1%;
 }
 #messageInput {
