@@ -1,3 +1,4 @@
+
 // var serverPort = 43543;
 // server side
 // Import
@@ -26,6 +27,8 @@ var users = 1; //number of connected users
 var rooms = 0;
 // rooms which are currently available in chat
 var rooms = ['room1','room2','room3'];
+var rooms_users = [];
+
 
 server.listen(serverPort, host, function() {
 	// print a message when the server starts listening
@@ -245,14 +248,17 @@ io.sockets.on('connection', function (socket) {
 	});
 
 	socket.on('addRoom', function(newroom) {
-		socket.leave(socket.room);
-		// join new room, received as function parameter
-		socket.join(newroom);
-		socket.emit('message', 'SERVER', 'you have connected to '+ newroom);
-		socket.broadcast.to(socket.room).emit('message', 'SERVER', socket.username+' has left this room');
-		socket.room = newroom;
-		rooms.push(newroom);
-		socket.emit('updaterooms', rooms, newroom);
+		if(rooms_users.indexOf(socket.username) == -1) {
+			socket.leave(socket.room);
+			// join new room, received as function parameter
+			socket.join(newroom);
+			socket.emit('message', 'SERVER', 'you have connected to '+ newroom);
+			socket.broadcast.to(socket.room).emit('message', 'SERVER', socket.username+' has left this room');
+			socket.room = newroom;
+			rooms.push(newroom);
+			socket.emit('updaterooms', rooms, newroom);
+			rooms_users.push(socket.username);
+		}
 	});
 
 
